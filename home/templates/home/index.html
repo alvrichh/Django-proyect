@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block index %}
+    <div class="jumbotron mt-5">
+        <h1 class="display-4">Bienvenido a Mi Proyecto</h1>
+        <p class="lead">Este es un ejemplo de una página principal con enlaces a la administración y a las encuestas.</p>
+        <hr class="my-4">
+        <p>Puedes comenzar explorando las siguientes opciones:</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'admin:index' %}" role="button">Administración</a>
+            <a class="btn btn-success btn-lg" href="{% url 'polls:index' %}" role="button">Encuestas</a>
+        </p>
+    </div>
+{% endblock %}

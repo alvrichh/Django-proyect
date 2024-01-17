@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Álvaro Rodríguez Molina">
+    <title>{% block title %}Tutorial{% endblock %}</title>
+</head>
+<body>
+    <div class="container mt-4">
+        {% include 'header.html' %}
+
+        {% block index %}{% endblock %}
+
+        {% block content %}{% endblock %}
+
+        {% include 'footer.html' %}
+    </div>
+   </body>
+</html>
