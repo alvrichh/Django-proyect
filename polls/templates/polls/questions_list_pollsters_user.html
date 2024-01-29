@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Preguntas del usuario</h1>
+
+    {% if question_list %}
+    <ul>
+
+      {% for question in question_list %}
+      <li class="{% if question.was_published_recently %}text-danger{% endif %}">
+        <a href="{% url 'polls:detail' question.pk %}">{{question.question_text}}</a> ({{ question.pub_date }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>No hay preguntas para este usuario.</p>
+    {% endif %}
+{% endblock %}

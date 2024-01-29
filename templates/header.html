@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand" href="{% url 'home:index' %}">Mi Proyecto</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -13,9 +13,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'polls:index' %}">Encuestas</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:index' %}">Login</a>
-                </li>
+                {% if user.is_authenticated %}
+                <li>User: {{ user.get_username }}</li>
+                <li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar sesión</a></li>
+              {% else %}
+                <li><a href="{% url 'login'%}?next={{request.path}}">Iniciar sesión</a></li>
+              {% endif %}
+             </ul>
+
             </ul>
         </div>
     </div>

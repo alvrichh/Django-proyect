@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 from .models import Question, Choice
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
@@ -28,6 +30,16 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
 
+class QuestionByUserListView(LoginRequiredMixin,generic.ListView):
+    """
+    Vista genérica basada en clases que enumera las preguntas asignadas al usuario actual.
+    """
+    model = Question
+    template_name='polls/questions_list_pollsters_user.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Question.objects.filter(pollster=self.request.user).order_by('pub_date')
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
