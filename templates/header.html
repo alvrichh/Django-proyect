@@ -1,26 +1,44 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'home:index' %}">Mi Proyecto</a>
+        <a class="navbar-brand" href="{% url 'index' %}">Mi Proyecto</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin:index' %}">Administración</a>
+                    <a class="nav-link" href="{% url 'admin:index' %}">
+                        <i class="bi bi-gear"></i> Administración
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'polls:index' %}">Encuestas</a>
+                    <a class="nav-link" href="{% url 'polls:index' %}">
+                        <i class="bi bi-bar-chart-line"></i> Encuestas
+                    </a>
                 </li>
                 {% if user.is_authenticated %}
-                <li>User: {{ user.get_username }}</li>
-                <li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar sesión</a></li>
-              {% else %}
-                <li><a href="{% url 'login'%}?next={{request.path}}">Iniciar sesión</a></li>
-              {% endif %}
-             </ul>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'polls:myquestions' %}">
+                            <i class="bi bi-file-earmark-text"></i> Mis Encuestas
+                        </a>
+                    </li>
+                    <li class="nav-link"><i class="bi bi-person"></i> User: {{ user.get_username }}</li>
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button class="btn btn-link nav-link" type="submit">
+                                <i class="bi bi-power"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="btn btn-link nav-link" href="{% url 'login' %}?next={{request.path}}">
+                            <i class="bi bi-box-arrow-right"></i> Iniciar sesión
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

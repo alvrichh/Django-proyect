@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'polls.apps.PollsConfig',
     'home.apps.HomeConfig',
+    'authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
